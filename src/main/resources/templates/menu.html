@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts/parent">
+<head>
+<title th:text="#{menu}">Menu</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="col-xs-6">
+				<a href="#" th:text="#{new.game}" th:href="@{/game/create/{username}(username=${user.username})}" class="btn btn-success btn-block">New
+					Game</a>
+
+			</div>
+			<div class="col-xs-6">
+				<a href="#" th:if="${user.game}" th:text="#{continue}" th:href="@{/game/continue/{username}(username=${user.username})}" class="btn btn-primary btn-block">Continue</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

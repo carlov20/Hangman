@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts/parent">
+<head>
+
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/3.1.0/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/game.js"
+	th:src="@{/js/game.js}"></script>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<h1 th:text="#{game.id(${game.id})}" id="gameId"></h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6 text-center" id="gameWord">
+				<span th:each="i : ${#numbers.sequence(1,game.word.length())}"
+					th:text="${game.letterChosen(game.word.charAt(i-1))} ? ${game.word.charAt(i-1)} : '_'"
+					class="h2"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-1 text-center"
+				th:each="i : ${#numbers.sequence(1,26)}">
+				<button class="btn btn-default spaced-button"
+					th:text="${T(java.lang.Character).toChars(i+64)[0]}"
+					th:disabled="${game.letterChosen(T(java.lang.Character).toChars(i+64)[0])}"
+					th:onclick="'letterClick(\'' + @{/game/click/{gameId}/{letter}(gameId=${game.id},letter=${T(java.lang.Character).toChars(i+64)[0]})} + '\',this, \'' + @{/game/complete/{gameId}(gameId=${game.id})} + '\')'"></button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-4 col-xs-4 text-center">
+				<span th:text="#{remaining.guesses}" th:remove="tag"></span> <span
+					id="remainingGuesses" th:text="${game.remainingGuesses}"></span>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

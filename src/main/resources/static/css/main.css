@@ -1,0 +1,16 @@
+.navbar-green {
+	background-color: #248c24;
+	border-color:black;
+}
+
+.navbar-green .navbar-brand {
+	color: white;
+}
+
+.navbar-green .navbar-brand:hover {
+	color: #eeeeee;
+}
+
+.spaced-button {
+	margin: 5px;
+}
